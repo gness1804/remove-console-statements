@@ -10,12 +10,10 @@ const func = async (path) => {
       true,
       true,
     );
-  try {
-    await access(path);
-    return true;
-  } catch (error) {
-    return false;
+    access(path).then((err) => {
+      if (err) return false;
+      return true;
+    })
   }
-};
 
 export default func;
