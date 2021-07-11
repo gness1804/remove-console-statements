@@ -2,7 +2,7 @@
 
 /**
  * remove-console-statements
- * Removes console.* statements from your code. 
+ * Removes console.* statements from your code.
  * @author Graham Nessler
  */
 

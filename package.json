@@ -18,6 +18,9 @@
     "tag:minor": "npm version minor && npm run changelog",
     "tag:major": "npm version major && npm run changelog"
   },
+  "pre-commit": [
+    "lint"
+  ],
   "dependencies": {
     "babel-eslint": "^10.1.0",
     "cli-alerts": "^1.2.2",
@@ -26,6 +29,7 @@
     "cli-meow-help": "^2.0.2",
     "cli-welcome": "^2.2.2",
     "meow": "^10.0.1",
+    "pre-commit": "^1.2.2",
     "update-notifier": "^5.1.0"
   },
   "devDependencies": {
