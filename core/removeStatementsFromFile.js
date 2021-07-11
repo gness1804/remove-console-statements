@@ -2,7 +2,7 @@ import handleError from 'cli-handle-error';
 import execa from 'execa';
 import fs from 'fs';
 import exists from '../utils/exists.js';
-import { consoleRegexDiff, consoleRegexRead } from '../utils/regexes.js';
+import { consoleRegexDiff } from '../utils/regexes.js';
 import alert from 'cli-alerts';
 
 const { readFile, writeFile } = fs.promises;
@@ -27,12 +27,17 @@ const removeStatementsFromFile = async (file) => {
     );
 
   const { stdout: data } = await execa.command(`git diff ${file}`);
-  const result = data.match(consoleRegexDiff);
+  const results = data.match(consoleRegexDiff);
 
-  if (result && result.length) {
-    const text = await readFile(file, 'utf8');
-    const modifiedText = text.replace(consoleRegexRead, '');
-    await writeFile(file, modifiedText, 'utf8');
+  if (results && results.length) {
+    let text = await readFile(file, 'utf8');
+
+    for (let res of results) {
+      res = res.replace(/\+/, '');
+      text = text.replace(res, '');
+    }
+
+    await writeFile(file, text, 'utf8');
     alert({
       type: 'success',
       msg: `Successfully removed introduced console statements from ${file}`,
