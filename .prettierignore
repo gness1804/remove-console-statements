@@ -1,0 +1,15 @@
+# editor-specific files
+.vscode/
+.idea/
+# node modules
+node_modules
+# common config files
+.prettierrc.json
+.eslintrc.js
+*.config.js
+.babelrc
+package.json
+# markdown files
+README.md
+CHANGELOG.md
+# project-specific files

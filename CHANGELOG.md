@@ -1,0 +1,1 @@
+<!-- This is a placeholder for the changelog. You can generate it using the "changelog" or "tag:*" scripts in the package.json or you can create it some other way.-->
