@@ -4,6 +4,7 @@
   "version": "0.1.1",
   "author": "Graham Nessler",
   "repository": "",
+  "main": "index.js",
   "type": "module",
   "bin": {
     "remove-console-statements": "index.js",

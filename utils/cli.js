@@ -16,8 +16,12 @@ const flags = {
   list: {
     type: 'boolean',
     alias: 'l',
-    desc: 'Show number of "console.*" statements in each modified file.',
-    default: true,
+    desc: 'Show number of "console.*" statements in each modified file. Files need to be tracked to be counted.',
+  },
+  diff: {
+    type: 'boolean',
+    alias: 'f',
+    desc: 'Show number of "console.*" statements introduced into each modified file since the last commit. Looks at unstaged changes. Files need to be tracked to be counted.',
   },
 };
 
