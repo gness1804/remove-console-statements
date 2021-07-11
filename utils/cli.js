@@ -13,6 +13,12 @@ const flags = {
     alias: 'v',
     desc: 'Print CLI version.',
   },
+  list: {
+    type: 'boolean',
+    alias: 'l',
+    desc: 'Show number of "console.*" statements in each modified file.',
+    default: true,
+  },
 };
 
 const commands = {

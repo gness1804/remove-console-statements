@@ -6,12 +6,14 @@
  * @author Graham Nessler
  */
 
+import handleError from 'cli-handle-error';
 import init from './utils/init.js';
 import cli from './utils/cli.js';
 import log from './utils/log.js';
+import listStatementsInChangedFiles from './core/listStatementsInChangedFiles.js';
 
 const { input, flags } = cli;
-const { debug } = flags;
+const { debug, list } = flags;
 
 (async () => {
   init();
@@ -19,10 +21,13 @@ const { debug } = flags;
   // show help if requested
   input.includes('help') && cli.showHelp(0);
 
-  /*eslint-disable-next-line no-console */
-  console.info(
-    'If you can read this, the CLI works! Now on to the hard part...',
-  );
-
   debug && log(flags);
+
+  if (list) {
+    try {
+      await listStatementsInChangedFiles();
+    } catch (error) {
+      handleError('Problem listing console statements in files', error);
+    }
+  }
 })();
