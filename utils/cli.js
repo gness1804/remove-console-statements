@@ -20,8 +20,13 @@ const flags = {
   },
   diff: {
     type: 'boolean',
-    alias: 'f',
+    alias: 'i',
     desc: 'Show number of "console.*" statements introduced into each modified file since the last commit. Looks at unstaged changes. Files need to be tracked to be counted.',
+  },
+  file: {
+    type: 'string',
+    alias: 'f',
+    desc: 'Remove introduced "console.*" statements from a file specified. Must enter a valid file path.',
   },
 };
 

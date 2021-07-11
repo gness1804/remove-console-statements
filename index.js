@@ -12,9 +12,10 @@ import cli from './utils/cli.js';
 import log from './utils/log.js';
 import listStatementsInChangedFiles from './core/listStatementsInChangedFiles.js';
 import listStatementsInDiffs from './core/listStatementsInDiffs.js';
+import removeStatementsFromFile from './core/removeStatementsFromFile.js';
 
 const { input, flags } = cli;
-const { debug, list, diff } = flags;
+const { debug, list, diff, file } = flags;
 
 (async () => {
   init();
@@ -35,6 +36,12 @@ const { debug, list, diff } = flags;
       await listStatementsInDiffs();
     } catch (error) {
       handleError('Problem listing console statements in file diffs', error);
+    }
+  } else if (file) {
+    try {
+      await removeStatementsFromFile(file);
+    } catch (error) {
+      handleError('Problem removing console statements from file', error);
     }
   } else {
     // fall back to just listing statements in changed files; same as "--list"
