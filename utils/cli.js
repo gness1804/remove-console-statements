@@ -28,6 +28,11 @@ const flags = {
     alias: 'f',
     desc: 'Remove introduced "console.*" statements from a file specified. Must enter a valid file path.',
   },
+  bulk: {
+    type: 'boolean',
+    alias: 'b',
+    desc: 'Remove all introduced "console.*" statements from all changed files. Files need to be tracked to be counted.',
+  },
 };
 
 const commands = {

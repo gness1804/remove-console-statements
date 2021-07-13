@@ -13,9 +13,10 @@ import log from './utils/log.js';
 import listStatementsInChangedFiles from './core/listStatementsInChangedFiles.js';
 import listStatementsInDiffs from './core/listStatementsInDiffs.js';
 import removeStatementsFromFile from './core/removeStatementsFromFile.js';
+import removeAllStatements from './core/removeAllStatements.js';
 
 const { input, flags } = cli;
-const { debug, list, diff, file } = flags;
+const { debug, list, diff, file, bulk } = flags;
 
 (async () => {
   init();
@@ -42,6 +43,15 @@ const { debug, list, diff, file } = flags;
       await removeStatementsFromFile(file);
     } catch (error) {
       handleError('Problem removing console statements from file', error);
+    }
+  } else if (bulk) {
+    try {
+      await removeAllStatements();
+    } catch (error) {
+      handleError(
+        'Problem removing all console statements in file diffs',
+        error,
+      );
     }
   } else {
     // fall back to just listing statements in changed files; same as "--list"
