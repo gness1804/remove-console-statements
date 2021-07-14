@@ -2,7 +2,7 @@ import handleError from 'cli-handle-error';
 import execa from 'execa';
 import fs from 'fs';
 import exists from '../utils/exists.js';
-import { consoleRegexDiff } from '../utils/regexes.js';
+import { regexDiffReplacer, regexDiffShort } from '../utils/regexes.js';
 import alert from 'cli-alerts';
 
 const { readFile, writeFile } = fs.promises;
@@ -27,12 +27,13 @@ const removeStatementsFromFile = async (file) => {
     );
 
   const { stdout: data } = await execa.command(`git diff ${file}`);
-  const results = data.match(consoleRegexDiff);
+  const resultsOneLine = data.match(regexDiffReplacer);
+  const allResults = data.match(regexDiffShort);
 
-  if (results && results.length) {
+  if (resultsOneLine && resultsOneLine.length) {
     let text = await readFile(file, 'utf8');
 
-    for (let res of results) {
+    for (let res of resultsOneLine) {
       res = res.replace(/\+/, '');
       text = text.replace(res, '');
     }
@@ -40,7 +41,22 @@ const removeStatementsFromFile = async (file) => {
     await writeFile(file, text, 'utf8');
     alert({
       type: 'success',
-      msg: `Successfully removed introduced console statements from ${file}`,
+      msg: `Successfully removed ${resultsOneLine.length} introduced console statements from ${file}`,
+    });
+
+    if (allResults.length > resultsOneLine.length) {
+      alert({
+        type: 'warning',
+        msg: `There are ${
+          allResults.length - resultsOneLine.length
+        } console.* statements remaining in ${file}. These must be removed manually.`,
+      });
+    }
+  } else if (allResults && allResults.length) {
+    // only multiline statements.
+    alert({
+      type: 'warning',
+      msg: `There are ${allResults.length} console.* statements remaining in ${file}. These must be removed manually.`,
     });
   }
 };

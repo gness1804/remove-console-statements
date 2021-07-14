@@ -1,3 +1,5 @@
-export const consoleRegexRead = /console\.([a-z])+\(.*\);?/g;
+export const regexShort = /console\.([a-z])+\(/g;
 
-export const consoleRegexDiff = /\+(.)*console\.([a-z])+\(.*\);?/g;
+export const regexDiffShort = /\+(.)*console\.([a-z])+\(/g;
+
+export const regexDiffReplacer = /\+(.)*console\.([a-z])+\(.*\);?/g;
