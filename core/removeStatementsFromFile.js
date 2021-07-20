@@ -56,7 +56,7 @@ const removeStatementsFromFile = async (file) => {
     // only multiline statements.
     alert({
       type: 'warning',
-      msg: `There are ${allResults.length} console.* statements remaining in ${file}. These must be removed manually.`,
+      msg: `There are ${allResults.length} multiline console.* statements remaining in ${file}. These must be removed manually.`,
     });
   }
 };
