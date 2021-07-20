@@ -48,6 +48,87 @@ help  Print help info
 -b, --bulk     Remove all introduced "console.*" statements from all changed files. Files need to be tracked to be counted. Default: false
 ```
 
+## Examples
+Given the following unstaged changed files:
+```js
+// index.js
+import axios from 'axios';
+import path from 'path';
+
+const filePath = path.join(__dirname, './file.js');
+
+try {
+  // introduced console.* statement
+  console.log(process.env.WHATEVER);
+  if (process.env.WHATEVER === 'true') {
+    axios.get(filePath).then(() => doSomething());
+  }
+} catch(error) {
+  // pre-existing committed console* statement
+  console.error(`Something went wrong: ${error}`)
+}
+```
+
+```js
+// myModule.test.js
+
+import { myModule } from '../myModule';
+
+it('does what it should', function() {
+  const res = myModule();
+  // introduced console.* statement
+  console.log(res);
+  expect(res).toEqual(42);
+})
+```
+
+...the following commands would behave as follows:
+
+```sh
+remove-console-statements -l
+# or remove-console-statements with no arguments
+
+# Counts all console statements in these files
+⚠  WARNING  There are 2 console.* statements in index.js.
+
+
+⚠  WARNING  There are 1 console.* statements in myModule.test.js.
+
+```
+
+```sh
+remove-console-statements -i
+
+# only counts console statements introduced since in changed files
+⚠  WARNING  There are 1 console.* statements that have been introduced in index.js.
+
+
+⚠  WARNING  There are 1 console.* statements that have been introduced in myModule.test.js.
+
+```
+
+```sh
+remove-console-statements -f index.js
+
+# removed introduced console statement in the file
+✔  SUCCESS  Successfully removed 1 introduced console statements from index.js
+```
+
+```sh
+remove-console-statements -b
+
+# removed all introduced console statements
+✔  SUCCESS  Successfully removed 1 introduced console statements from index.js
+
+
+✔  SUCCESS  Successfully removed 1 introduced console statements from myModule.test.js
+```
+
+
+<br />
+
+
+-- multiline
 ## Changelog
 
 [❯ Read the changelog here →](CHANGELOG.md)
