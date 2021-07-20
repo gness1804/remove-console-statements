@@ -1,5 +1,8 @@
 import meow from 'meow';
 import meowHelp from 'cli-meow-help';
+import { createRequire } from 'module';
+const require = createRequire(import.meta.url);
+const pkg = require('../package.json');
 
 const flags = {
   debug: {
@@ -42,7 +45,8 @@ const commands = {
 };
 
 const helpText = meowHelp({
-  name: 'rmconsole',
+  name: `npx ${pkg.name}`,
+  desc: pkg.description,
   flags,
   commands,
 });
