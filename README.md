@@ -1,10 +1,14 @@
 # remove-console-statements
 
-> Removes console.* statements from your code. 
+> Counts and removes console.* statements from your code. A solution to console chaos!
+
+<br />
 
 ## Why
 
-<!-- optional section to explain rationale of the project and main advantages it offers. Delete if not needed. -->
+Have you struggled with too many console.\* statements peppering your code? You know the drill: trying to debug something, you plan to add just one or two `console.log`s, but you end up with eight. (Or twenty.) Isn't it annoying to manually try to track them all down? Even with today's modern IDEs, this gets tiresome. This handy utility seeks to address this problem by enabling you to count all console.\* statements in your changed files and to delete them as well. Less time struggling with console statements, and more time focusing on what really matters!
+
+<br />
 
 ## Install
 
@@ -14,36 +18,34 @@ OR
 npx remove-console-statements
 ```
 
+<br />
+
 ## Usage
-```js
-import remove-console-statements from 'remove-console-statements';
-// more js code to explain how to use the package.
-```
-
-### [Some Usage Subcategory, such as Handling Errors]
-```js
-// optional. Can help explain various ways of using the package. Use none or as many as you need.
-```
-
-#### BASIC USAGE
 
 ```sh
 remove-console-statements <command> [option]
+rmconsole <command> [option]
 ```
 
-#### COMMANDS
+<br />
+
+### COMMANDS
 
 ```sh
 help  Print help info
-# other commands as needed. You may want to run `yarn start help` or `npm start help` and copy and paste the output.
 ```
 
-#### OPTIONS
+<br />
+
+### OPTIONS
 
 ```sh
 -d, --debug    Print debug info Default: false
 -v, --version  Print CLI version Default: false
-# other flags as needed. You may want to run `yarn start help` or `npm start help` and copy and paste the output.
+-l, --list     Show number of "console.*" statements in each modified file. Files need to be tracked to be counted. Default: false
+-i, --diff     Show number of "console.*" statements introduced into each modified file since the last commit. Looks at unstaged changes. Files need to be tracked to be counted. Default: false
+-f, --file     Remove all introduced "console.*" statements from a file specified. Must enter a valid file path. Default: false
+-b, --bulk     Remove all introduced "console.*" statements from all changed files. Files need to be tracked to be counted. Default: false
 ```
 
 ## Changelog
