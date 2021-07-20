@@ -3,7 +3,7 @@ import fs from 'fs';
 import alert from 'cli-alerts';
 const { readFile } = fs.promises;
 import exists from '../utils/exists.js';
-import { consoleRegexRead } from '../utils/regexes.js';
+import { regexShort } from '../utils/regexes.js';
 
 const getChangedFiles = async () => await execa.command('git diff --name-only');
 
@@ -21,7 +21,7 @@ const listStatementsInChangedFiles = async () => {
   for (const file of files) {
     if (file && exists(file)) {
       const data = await readFile(file, 'utf8');
-      const result = data.match(consoleRegexRead);
+      const result = data.match(regexShort);
       if (result && result.length) {
         alert({
           type: 'warning',

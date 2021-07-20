@@ -1,7 +1,7 @@
 import execa from 'execa';
 import alert from 'cli-alerts';
 import exists from '../utils/exists.js';
-import { consoleRegexDiff } from '../utils/regexes.js';
+import { regexDiffShort } from '../utils/regexes.js';
 
 const getChangedFiles = async () => await execa.command('git diff --name-only');
 
@@ -19,7 +19,7 @@ const listStatementsInChangedFiles = async () => {
   for (const file of files) {
     if (file && exists(file)) {
       const { stdout: data } = await execa.command(`git diff ${file}`);
-      const result = data.match(consoleRegexDiff);
+      const result = data.match(regexDiffShort);
       if (result && result.length) {
         alert({
           type: 'warning',
