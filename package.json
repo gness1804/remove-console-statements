@@ -10,6 +10,11 @@
     "remove-console-statements": "index.js",
     "rmconsole": "index.js"
   },
+  "keywords": [
+    "console",
+    "debug",
+    "sanitation"
+  ],
   "scripts": {
     "lint": "eslint . && prettier --check \"./**/*.{js,json}\"",
     "fix": "eslint --fix . && prettier --write \"./**/*.{js,json}\"",
