@@ -1,7 +1,7 @@
 {
   "name": "remove-console-statements",
   "description": "Counts and removes console.* statements from your code. A solution to console chaos!",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "author": "Graham Nessler",
   "repository": "",
   "main": "index.js",
