@@ -26,7 +26,7 @@ const { debug, list, diff, file, bulk } = flags;
 
   debug && log(flags);
 
-  if (process.argv.includes('-f') && !file)
+  if ((process.argv.includes('-f') || process.argv.includes('--file')) && !file)
     handleError('You must enter a valid file path if using the --file flag.', {
       message: 'You must enter a valid file path if using the --file flag.',
     });
