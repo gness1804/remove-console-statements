@@ -6,7 +6,7 @@
 
 ## Why
 
-Have you struggled with too many console.\* statements peppering your code? You know the drill: trying to debug something, you plan to add just one or two `console.log`s, but you end up with eight. (Or twenty.) Isn't it annoying to manually try to track them all down? Even with today's modern IDEs, this gets tiresome. This handy utility seeks to address this problem by enabling you to count all console.\* statements in your changed files and to delete them as well. Less time struggling with console statements, and more time focusing on what really matters!
+Have you struggled with too many console.\* statements peppering your code? You know the drill: trying to debug something, you plan to add just one or two `console.log`s, but you end up with eight. (Or twenty.) Isn't it annoying to manually try to track them all down? Even with today's modern IDEs, this gets tiresome. This handy utility seeks to address this problem by enabling you to count all console.\* statements in your changed files and to delete them as well. Now also includes the capability to hide (comment out) console.\* statements! Less time struggling with console statements, and more time focusing on what really matters!
 
 <br />
 
@@ -40,12 +40,13 @@ help  Print help info
 ### OPTIONS
 
 ```sh
--d, --debug    Print debug info Default: false
--v, --version  Print CLI version Default: false
+-d, --debug    Print debug info. Default: false
+-v, --version  Print CLI version. Default: false
 -l, --list     Show number of "console.*" statements in each modified file. Files need to be tracked to be counted. Default: false
 -i, --diff     Show number of "console.*" statements introduced into each modified file since the last commit. Looks at unstaged changes. Files need to be tracked to be counted. Default: false
 -f, --file     Remove all introduced "console.*" statements from a file specified. Must enter a valid file path. Default: false
 -b, --bulk     Remove all introduced "console.*" statements from all changed files. Files need to be tracked to be counted. Default: false
+-h, --hide     Hide (comment out) all introduced "console.*" statements in all changed files. Files need to be tracked to be counted. Default: false
 ```
 Default behavior (no flags): same as `--list`.
 
@@ -125,6 +126,16 @@ remove-console-statements -b
 
 
 ✔  SUCCESS  Successfully removed 1 introduced console statements from myModule.test.js
+```
+
+```sh
+remove-console-statements -h
+
+# hide all introduced console statements
+✔  SUCCESS  Successfully hid 1 introduced console statements from index.js
+
+
+✔  SUCCESS  Successfully hid 1 introduced console statements from myModule.test.js
 ```
 
 
