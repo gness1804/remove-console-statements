@@ -31,39 +31,43 @@ const { debug, list, diff, file, bulk } = flags;
       message: 'You must enter a valid file path if using the --file flag.',
     });
 
-  if (list) {
-    try {
-      await listStatementsInChangedFiles();
-    } catch (error) {
-      handleError('Problem listing console statements in files', error);
-    }
-  } else if (diff) {
-    try {
-      await listStatementsInDiffs();
-    } catch (error) {
-      handleError('Problem listing console statements in file diffs', error);
-    }
-  } else if (file) {
-    try {
-      await removeStatementsFromFile(file);
-    } catch (error) {
-      handleError('Problem removing console statements from file', error);
-    }
-  } else if (bulk) {
-    try {
-      await removeAllStatements();
-    } catch (error) {
-      handleError(
-        'Problem removing all console statements in file diffs',
-        error,
-      );
-    }
-  } else {
-    // fall back to just listing statements in changed files; same as "--list"
-    try {
-      await listStatementsInChangedFiles();
-    } catch (error) {
-      handleError('Problem listing console statements in files', error);
-    }
+  switch (true) {
+    case list:
+      try {
+        await listStatementsInChangedFiles();
+      } catch (error) {
+        handleError('Problem listing console statements in files', error);
+      }
+      break;
+    case diff:
+      try {
+        await listStatementsInDiffs();
+      } catch (error) {
+        handleError('Problem listing console statements in file diffs', error);
+      }
+      break;
+    case !!file:
+      try {
+        await removeStatementsFromFile(file);
+      } catch (error) {
+        handleError('Problem removing console statements from file', error);
+      }
+      break;
+    case bulk:
+      try {
+        await removeAllStatements();
+      } catch (error) {
+        handleError(
+          'Problem removing all console statements in file diffs',
+          error,
+        );
+      }
+      break;
+    default:
+      try {
+        await listStatementsInChangedFiles();
+      } catch (error) {
+        handleError('Problem listing console statements in files', error);
+      }
   }
 })();
