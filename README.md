@@ -47,6 +47,9 @@ help  Print help info
 -f, --file     Remove all introduced "console.*" statements from a file specified. Must enter a valid file path. Default: false
 -b, --bulk     Remove all introduced "console.*" statements from all changed files. Files need to be tracked to be counted. Default: false
 ```
+Default behavior (no flags): same as `--list`.
+
+<br />
 
 ## Examples
 Given the following unstaged changed files:
@@ -128,7 +131,18 @@ remove-console-statements -b
 <br />
 
 
--- multiline
+## Other Notes
+* **Multiline console statements**: the app will idenity multiline console statements, but cannot automatically delete them. One example:
+  ```js
+  console.info(`
+    something that needs more
+    than one line
+  `);
+  ```
+
+* **Flavors of console statements**: Right now, the app doesn't distinguish between different flavors of console statements. (for example, `console.log`, `console.error`, `console.info`, etc.) All are identified and treated the same. In a future version of the app, I will try to add the capability to distinguish between these varieties. (For instance, one might add a flag to only target `console.log`s.
+* **Git**: the app uses git under the hood, so you'll need to have it installed.
+
 ## Changelog
 
-[❯ Read the changelog here →](CHANGELOG.md)
+[❯ Read the changelog here →](https://github.com/gness1804/remove-console-statements/blob/master/CHANGELOG.md)
