@@ -14,9 +14,10 @@ import listStatementsInChangedFiles from './core/listStatementsInChangedFiles.js
 import listStatementsInDiffs from './core/listStatementsInDiffs.js';
 import removeStatementsFromFile from './core/removeStatementsFromFile.js';
 import removeAllStatements from './core/removeAllStatements.js';
+import hideAllStatements from './core/hideAllStatements.js';
 
 const { input, flags } = cli;
-const { debug, list, diff, file, bulk } = flags;
+const { debug, list, diff, file, bulk, hide } = flags;
 
 (async () => {
   init();
@@ -59,6 +60,16 @@ const { debug, list, diff, file, bulk } = flags;
       } catch (error) {
         handleError(
           'Problem removing all console statements in file diffs',
+          error,
+        );
+      }
+      break;
+    case hide:
+      try {
+        await hideAllStatements();
+      } catch (error) {
+        handleError(
+          'Problem hiding all console statements in file diffs',
           error,
         );
       }

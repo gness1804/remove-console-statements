@@ -36,6 +36,11 @@ const flags = {
     alias: 'b',
     desc: 'Remove all introduced "console.*" statements from all changed files. Files need to be tracked to be counted.',
   },
+  hide: {
+    type: 'boolean',
+    alias: 'h',
+    desc: 'Hide (comment out) all introduced "console.*" statements in all changed files. Files need to be tracked to be counted.',
+  },
 };
 
 const commands = {
